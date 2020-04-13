@@ -7,6 +7,7 @@ from flask import request, make_response
 from flask import current_app
 from time import time
 
+
 def verify_signature(request, timestamp, signature, signing_secret):
     # Verify the request signature of the request sent from Slack
     # Generate a new hash using the app's signing secret and request data
@@ -29,6 +30,7 @@ def verify_signature(request, timestamp, signature, signing_secret):
     ).hexdigest()
 
     return hmac.compare_digest(request_hash, signature)
+
 
 def slack_sig_auth(f):
     @wraps(f)
