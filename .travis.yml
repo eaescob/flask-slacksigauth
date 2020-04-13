@@ -9,6 +9,6 @@ install:
   - travis_retry pip install flake8
 script:
   - flake8 flask_slacksigauth
-  - py.test --cov-report --cov=flask_slacksigauth tests
+  - py.test --cov-report= --cov=flask_slacksigauth tests
 after_success:
   - codecov -e $TRAVIS_PYTHON_VERSION
