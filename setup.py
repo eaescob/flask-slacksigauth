@@ -22,9 +22,14 @@ def find_version(*file_paths):
         return version_match.group(1)
     raise RuntimeError("Unable to find version string.")
 
+with open('README.rst', 'r') as fh:
+    long_description = fh.read()
+
 setup(name='flask_slacksigauth',
       version=find_version('flask_slacksigauth', 'version.py'),
       description='Python Flask adapter for verifying Slack signatures',
+      long_description=long_description,
+      long_description_content_type='text/x-rst',
       url='https://github.com/eaescob/flask-slacksigauth',
       author='Emilio Escobar',
       author_email='eescobar@gmail.com',
