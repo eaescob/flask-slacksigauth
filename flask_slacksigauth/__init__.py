@@ -35,7 +35,7 @@ def verify_signature(request, timestamp, signature, signing_secret):
 def slack_sig_auth(f):
     @wraps(f)
     def validate_slack_signature(*args, **kwargs):
-        slack_signing_secret = current_app.config['SLACK_SIGNING_SECRET']
+        slack_signing_secret = current_app.config['SLACK_SIGNING_SECRET'] or os.environ['SLACK_SIGNING_SECRET']
         req_timestamp = request.headers.get('X-Slack-Request-Timestamp')
         req_signature = request.headers.get('X-Slack-Signature')
 
