@@ -4,6 +4,8 @@ Slack Signature Authentication for Flask
     :target: https://travis-ci.org/eaescob/flask-slacksigauth
 .. image:: https://codecov.io/gh/eaescob/flask-slacksigauth/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/eaescob/flask-slacksigauth
+.. image:: https://badge.fury.io/py/flask-slacksigauth.svg
+    :target: https://badge.fury.io/py/flask-slacksigauth
 
 The Slack Signature Authentication module is a Python-based solution for Flask applications
 to be able to authenticate POST requests coming in from Slack. The module returns HTTP code
