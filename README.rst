@@ -12,14 +12,14 @@ that can be used for Flask routes.
 
 Installation
 ------------
-.. code:: pip install flask_slacksigauth
+.. code:: shell
+pip install flask_slacksigauth
 
 App Setup
 ------------
 After declaring your Flask API endpoints, you can decorate them to for authentication checks:
 
 .. code:: python
-
 @app.route('/api', methods=['POST', 'GET'])
 @slack_sig_auth
 def api():
