@@ -14,7 +14,7 @@ Installation
 ------------
 .. code:: shell
 
-  pip install flask_slacksigauth
+  pip install flask-slacksigauth
 
 App Setup
 ------------
