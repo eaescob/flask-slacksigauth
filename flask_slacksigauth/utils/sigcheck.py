@@ -19,29 +19,10 @@ def verify_signature(request, timestamp, signature, signing_secret):
     if abs(time() - int(timestamp)) > 60 * 5:
         return False
 
-    if hasattr(hmac, "compare_digest"):
-        req = str.encode('v0:' + str(timestamp) + ':') + request.get_data()
-        request_hash = 'v0=' + hmac.new(
-            str.encode(signing_secret),
-            req, hashlib.sha256
-        ).hexdigest()
+    req = str.encode('v0:' + str(timestamp) + ':') + request.get_data()
+    request_hash = 'v0=' + hmac.new(
+        str.encode(signing_secret),
+        req, hashlib.sha256
+    ).hexdigest()
 
-        return hmac.compare_digest(request_hash, signature)
-    else:
-        # So, we'll compare the signatures explicitly
-        req = str.encode('v0:' + str(timestamp) + ':') + request.get_data()
-        request_hash = 'v0=' + hmac.new(
-            str.encode(signing_secret),
-            req, hashlib.sha256
-        ).hexdigest()
-
-        if len(request_hash) != len(signature):
-            return False
-        result = 0
-        if isinstance(request_hash, bytes) and isinstance(signature, bytes):
-            for x, y in zip(request_hash, signature):
-                result |= x ^ y
-        else:
-            for x, y in zip(request_hash, signature):
-                result |= ord(x) ^ ord(y)
-        return result == 0
+    return hmac.compare_digest(request_hash, signature)
