@@ -26,11 +26,8 @@ def verify_signature(request, timestamp, signature, signing_secret):
             str.encode(signing_secret),
             req, hashlib.sha256
         ).hexdigest()
-        # Compare byte strings for Python 2
-        if (sys.version_info[0] == 2):
-            return hmac.compare_digest(bytes(request_hash), bytes(signature))
-        else:
-            return hmac.compare_digest(request_hash, signature)
+        
+        return hmac.compare_digest(request_hash, signature)
     else:
         # So, we'll compare the signatures explicitly
         req = str.encode('v0:' + str(timestamp) + ':') + request.get_data()
