@@ -4,6 +4,8 @@ language: python
 python:
   - "3.5"
   - "3.6"
+  - "3.7"
+  - "3.8"
 install:
   - travis_retry pip install -r requirements.txt
   - travis_retry pip install flake8
