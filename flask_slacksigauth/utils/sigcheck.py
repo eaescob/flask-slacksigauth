@@ -1,6 +1,5 @@
 import hashlib
 import hmac
-import sys
 
 from time import time
 
@@ -26,7 +25,7 @@ def verify_signature(request, timestamp, signature, signing_secret):
             str.encode(signing_secret),
             req, hashlib.sha256
         ).hexdigest()
-        
+
         return hmac.compare_digest(request_hash, signature)
     else:
         # So, we'll compare the signatures explicitly
