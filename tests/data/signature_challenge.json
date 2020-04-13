@@ -1,0 +1,5 @@
+{
+  "token" : "THIS_IS_A_TOKEN",
+  "challenge" : "valid_challenge_token",
+  "type" : "slack_sigauth"
+}
