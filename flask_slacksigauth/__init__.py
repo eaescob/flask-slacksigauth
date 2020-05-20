@@ -42,9 +42,7 @@ def slack_sig_auth(f):
             slack_signing_secret = os.environ['SLACK_SIGNING_SECRET']
 
         if slack_signing_secret is None:
-            raise AttributeError(
-                'No slack signing secret configured, please set as environment variable or application configuration'
-            )
+            raise AttributeError('No slack signing secret configured, please see README.')
 
         req_timestamp = request.headers.get('X-Slack-Request-Timestamp')
         req_signature = request.headers.get('X-Slack-Signature')
