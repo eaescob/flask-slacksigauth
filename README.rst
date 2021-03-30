@@ -1,6 +1,6 @@
 Slack Signature Authentication for Flask
 ========================================
-.. image:: https://github.com/eaescob/flask-slacksigauth/actions/workflows/pythonpackage.yml/badge.svg
+.. image:: https://github.com/eaescob/flask-slacksigauth/actions/workflows/pythonpackage.yml/badge.svg?event=pull_request
     :target: https://github.com/eaescob/flask-slacksigauth
 .. image:: https://codecov.io/gh/eaescob/flask-slacksigauth/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/eaescob/flask-slacksigauth
