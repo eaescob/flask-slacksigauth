@@ -54,7 +54,7 @@ def test_invalid_timestamp(client):
 
     assert res.status_code == 403
 
-    
+
 def test_slack_sigauth(client):
     data = pytest.sig_challenge_fixture
     timestamp = int(time.time())

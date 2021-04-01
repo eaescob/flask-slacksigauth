@@ -50,3 +50,7 @@ def app():
 
     app = flask_app
     return app
+
+@pytest.fixture
+def client(app):
+    return app.test_client()
