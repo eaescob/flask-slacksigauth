@@ -1,0 +1,24 @@
+name: provenance
+
+on:
+  workflow_call:
+    inputs:
+      config-path:
+        required: true
+        type: string
+jobs:
+  provenance:
+    needs: [build]
+    uses: slsa-framework/slsa-github-builder/.github/workflows/generator_generic_slsa3.yml@v1.5.0
+    permissions:
+      # Needed to detect the GitHub Actions environment
+      actions: read
+      # Needed to create the provenance via GitHub OIDC
+      id-token: write
+      # Needed to create and upload to GitHub Releases
+      contents: write
+    with:
+      # SHA-256 hashes of the Python distributions.
+      subject-base64: ${{ provenance.needs.build.output.hashes }}
+      # Uploads the provenance file to a draft GitHub Release.
+      upload-assets: true
