@@ -5,6 +5,7 @@ import re
 
 here = os.path.abspath(os.path.dirname(__file__))
 
+
 # Read the version number from a source file.
 # Why read it, and not import?
 # see https://groups.google.com/d/topic/pypa-dev/0PkjVpcxTzQ/discussion
@@ -21,6 +22,7 @@ def find_version(*file_paths):
     if version_match:
         return version_match.group(1)
     raise RuntimeError("Unable to find version string.")
+
 
 with open('README.rst', 'r') as fh:
     long_description = fh.read()

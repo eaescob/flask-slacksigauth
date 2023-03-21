@@ -30,8 +30,10 @@ def load_challenge_fixture(event, as_string=True):
 def sig_challenge_fixture_plugin():
     return load_challenge_fixture('signature_challenge')
 
+
 def create_signature_plugin():
     return create_signature
+
 
 def pytest_configure():
     pytest.create_signature = create_signature_plugin()
@@ -50,6 +52,7 @@ def app():
 
     app = flask_app
     return app
+
 
 @pytest.fixture
 def client(app):

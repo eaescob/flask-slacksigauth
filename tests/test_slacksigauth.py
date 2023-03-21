@@ -1,8 +1,6 @@
 import pytest
 import time
 
-from flask import Flask
-
 
 def test_no_timestamp(client):
     data = pytest.sig_challenge_fixture
@@ -20,6 +18,7 @@ def test_no_timestamp(client):
 
     assert res.status_code == 403
 
+
 def test_no_signature(client):
     data = pytest.sig_challenge_fixture
     timestamp = int(time.time())
@@ -35,6 +34,7 @@ def test_no_signature(client):
     )
 
     assert res.status_code == 403
+
 
 def test_invalid_timestamp(client):
     data = pytest.sig_challenge_fixture
@@ -72,6 +72,7 @@ def test_slack_sigauth(client):
 
     assert res.status_code == 200
 
+
 def test_bad_sigauth(client):
     data = pytest.sig_challenge_fixture
     timestamp = int(time.time())
@@ -88,6 +89,7 @@ def test_bad_sigauth(client):
     )
 
     assert res.status_code == 403
+
 
 def test_no_secret_app_config(app, client):
     app.config['SLACK_SIGNING_SECRET'] = None
