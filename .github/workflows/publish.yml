@@ -27,7 +27,7 @@ jobs:
           python-version: 3.x
       - name: Install dependencies
         run: |
-          pyhon -m pip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install flake8 pytest pytest-flask build
       - name: Lint, test, build
