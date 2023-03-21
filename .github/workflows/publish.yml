@@ -61,7 +61,7 @@ jobs:
   publish:
     needs: ['build', 'provenance']
     permissions:
-      content: write
+      contents: write
 
     runs-on: "ubuntu-latest"
 
