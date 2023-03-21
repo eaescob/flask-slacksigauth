@@ -45,6 +45,7 @@ def app():
     flask_app = Flask(__name__)
     flask_app.testing = True
     flask_app.config['SLACK_SIGNING_SECRET'] = 'SIGNING_SECRET'
+
     @flask_app.route('/', methods=['POST', 'GET'])
     @slack_sig_auth
     def index():

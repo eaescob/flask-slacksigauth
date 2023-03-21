@@ -22,7 +22,6 @@ def test_no_timestamp(client):
 def test_no_signature(client):
     data = pytest.sig_challenge_fixture
     timestamp = int(time.time())
-    signature = pytest.create_signature('SIGNING_SECRET', timestamp, data)
 
     res = client.post(
         '/',
