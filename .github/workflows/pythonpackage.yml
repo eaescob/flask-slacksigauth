@@ -40,3 +40,9 @@ jobs:
         pip install pytest-flask
         export PYTHONPATH=${PYTHONPATH}:.
         pytest
+    - name: Generate SHA256 artifacts
+     run: |
+      cd dist && echo "hashes=$(sha256sum * | base64 -w0)" >> $GITHUB_OUTPUT
+    - uses: actions/upload-artifacts@...
+      with:
+        path: ./dist
