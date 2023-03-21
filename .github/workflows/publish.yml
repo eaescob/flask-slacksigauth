@@ -1,0 +1,86 @@
+name: Publish to PyPi
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+permissions:
+  contents: "read"
+  # Needed to access the workflow's OIDC identity.
+  id-token: "write"
+
+jobs:
+  build:
+    name: "Build dists"
+    runs-on: "ubuntu-latest"
+    environment:
+      name: "publish"
+    outputs:
+      hashes: ${{ steps.hash.outputs.hashes }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 3.x
+      - name: Install dependencies
+        run: |
+          pyhon -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install flake8 pytest pytest-flask build
+      - name: Lint, test, build
+        run : |
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+          export PYTHONPATH=${PYTHONPATH}:.
+          pytest
+          python -m build
+          cd dist && echo "hashes=$(sha256sum * | base64 -w0)" >> $GITHUB_OUTPUT
+      - name: Upload dist
+        uses: actions/upload-artifact@v3
+        with:
+          name: "dist"
+          path: "dist/"
+          if-no-files-found: error
+          retention-days: 5
+
+  provenance:
+    needs: [build]
+    permissions:
+      actions: read
+      contents: write
+      id-token: write
+    uses: "slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v1.5.0"
+    with:
+      base64-subjects: "${{ needs.build.outputs.hashes }}"
+      upload-assets: true
+      compile-generator: true # Workaround for https://github.com/slsa-framework/slsa-github-generator/issues/1163
+
+  publish:
+    needs: ['build', 'provenance']
+    permissions:
+      content: write
+
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: "dist"
+          path: "dist/"
+
+      - name: Upload to releases
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: |
+          gh release upload ${{ github.ref_name }} dist/* --repo ${{ github.repository }}
+
+      - name: Publish to PyPi
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_PASSWORD }}
+
