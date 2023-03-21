@@ -35,6 +35,8 @@ jobs:
         pip install pytest-flask
         export PYTHONPATH=${PYTHONPATH}:.
         pytest
+        pip install build
+        python -m build
         cd dist && echo "hashes=$(sha256sum * | base64 -w0)" >> $GITHUB_OUTPUT
     - uses: actions/upload-artifact@v3
       with:
