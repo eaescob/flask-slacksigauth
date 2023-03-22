@@ -15,9 +15,11 @@ that can be used for Flask routes.
 Integrity
 ---------
 Added `SLSA`_ provenance checks to every release starting with v1.0.9
+
 .. _SLSA: https://slsa.dev
 
 You will need to install `slsa-verifier`_ first
+
 .. _slsa-verifier: https://github.com/slsa-framework/slsa-verifier
 
 To verify:
