@@ -23,7 +23,6 @@ You will need to install `slsa-verifier`_ first
 .. _slsa-verifier: https://github.com/slsa-framework/slsa-verifier
 
 To verify:
-
 .. code:: shell
 
 $ python -m pip download --only-binary=:all: flask-slacksighauth #Downloads flask_slacksigauth-1.0.9-py3-none-any.whl
