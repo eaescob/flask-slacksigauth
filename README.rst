@@ -12,6 +12,27 @@ to be able to authenticate POST requests coming in from Slack. The module return
 403 for those requests that fail Slack's signature validation. The module adds a decorator
 that can be used for Flask routes.
 
+Integrity
+---------
+Added `SLSA`_ provenance checks to every release starting with v1.0.9
+.. _SLSA: https://slsa.dev
+
+You will need to install `slsa-verifier`_ first
+.. _slsa-verifier: https://github.com/slsa-framework/slsa-verifier
+
+To verify:
+.. code:: shell
+$ python -m pip download --only-binary=:all: flask-slacksighauth #Downloads flask_slacksigauth-1.0.9-py3-none-any.whl
+$ curl --location -O https://github.com/eaescob/flask-slacksigauth/releases/download/v1.0.9/multiple.intoto.jsonl
+$ slsa-verifier verify-artifact                       \
+   --provenance multiple.intoto.jsonl                 \
+   --source-uri github.com/eaescob/flask-slacksigauth \
+   flask_slacksigauth-1.0.9-py3-none-any.whl
+
+Check for - PASSED: Verified SLSA Provenance
+
+After successful verification, package is safe to be installed.
+   
 Installation
 ------------
 .. code:: shell
