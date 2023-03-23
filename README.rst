@@ -1,10 +1,10 @@
 Slack Signature Authentication for Flask
 ========================================
-.. image:: https://travis-ci.org/eaescob/flask-slacksigauth.svg?branch=master
-    :target: https://travis-ci.org/eaescob/flask-slacksigauth
-.. image:: https://codecov.io/gh/eaescob/flask-slacksigauth/branch/master/graph/badge.svg
+.. image:: https://github.com/eaescob/flask-slacksigauth/actions/workflows/build.yml/badge.svg
+    :target: https://github.com/eaescob/flask-slacksigauth/actions/workflows/build.yml
+.. image:: https://codecov.io/gh/eaescob/flask-slacksigauth/branch/master/graph/badge.svg?token=WPOI4PT5ZU 
     :target: https://codecov.io/gh/eaescob/flask-slacksigauth
-.. image:: https://badge.fury.io/py/flask-slacksigauth.svg
+.. image:: https://badge.fury.io/py/flask-slacksigauth.png
     :target: https://badge.fury.io/py/flask-slacksigauth
 
 The Slack Signature Authentication module is a Python-based solution for Flask applications
@@ -26,11 +26,11 @@ Provenance verification
 ^^^^^^^^^^^^^^^^^^^^^^^
 .. code:: shell
 
- python -m pip download --only-binary=:all: flask-slacksighauth #Downloads flask_slacksigauth-1.0.9-py3-none-any.whl
+ python -m pip download --only-binary=:all: flask-slacksigauth #Downloads flask_slacksigauth-1.0.9-py3-none-any.whl
  curl --location -O https://github.com/eaescob/flask-slacksigauth/releases/download/v1.0.9/multiple.intoto.jsonl
- slsa-verifier verify-artifact                       \
-   --provenance multiple.intoto.jsonl                 \
-   --source-uri github.com/eaescob/flask-slacksigauth \
+ slsa-verifier verify-artifact                             \
+   --provenance-path multiple.intoto.jsonl                 \
+   --source-uri github.com/eaescob/flask-slacksigauth      \
    flask_slacksigauth-1.0.9-py3-none-any.whl
 
 Check for - PASSED: Verified SLSA Provenance
