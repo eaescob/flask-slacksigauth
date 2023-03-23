@@ -1,10 +1,10 @@
 Slack Signature Authentication for Flask
 ========================================
-.. image:: https://travis-ci.org/eaescob/flask-slacksigauth.svg?branch=master
-    :target: https://travis-ci.org/eaescob/flask-slacksigauth
-.. image:: https://codecov.io/gh/eaescob/flask-slacksigauth/branch/master/graph/badge.svg
+.. image:: https://github.com/eaescob/flask-slacksigauth/actions/workflows/build.yml/badge.svg
+    :target: https://github.com/eaescob/flask-slacksigauth/actions/workflows/build.yml
+.. image:: https://codecov.io/gh/eaescob/flask-slacksigauth/branch/master/graph/badge.svg?token=WPOI4PT5ZU 
     :target: https://codecov.io/gh/eaescob/flask-slacksigauth
-.. image:: https://badge.fury.io/py/flask-slacksigauth.svg
+.. image:: https://badge.fury.io/py/flask-slacksigauth.png
     :target: https://badge.fury.io/py/flask-slacksigauth
 
 The Slack Signature Authentication module is a Python-based solution for Flask applications
