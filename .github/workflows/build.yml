@@ -43,3 +43,4 @@ jobs:
         name: codecov-umbrella
         flags: unittests # optional
         fail_ci_if_error: true
+        ignore: setup.py
