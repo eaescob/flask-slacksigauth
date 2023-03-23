@@ -38,7 +38,6 @@ jobs:
     - uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        directory: ./coverage/reports/
         files: ./coverage1.xml,./coverage2.xml,!./cache
         name: codecov-umbrella
         flags: unittests # optional
