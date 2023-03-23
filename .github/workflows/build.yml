@@ -21,7 +21,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install flake8 pytest pytest-flask build
+        pip install flake8 pytest pytest-flask build pytest-cov
     - name: Lint, test, generate artifacts and upload
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -29,7 +29,7 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
         export PYTHONPATH=${PYTHONPATH}:.
-        pytest
+        pytest --cov=./ --cov-report=xml
         python -m build
         cd dist && echo "hashes=$(sha256sum * | base64 -w0)" >> $GITHUB_OUTPUT
     - uses: actions/upload-artifact@v3
@@ -38,5 +38,8 @@ jobs:
     - uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
+        directory: ./coverage/reports/
+        files: ./coverage1.xml,./coverage2.xml,!./cache
+        name: codecov-umbrella
         flags: unittests # optional
         fail_ci_if_error: true
