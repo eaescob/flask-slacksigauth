@@ -25,4 +25,4 @@ pytest-flask==1.2.0
 requests==2.32.0
 toml==0.10.2
 urllib3==1.26.19
-Werkzeug==2.2.3
+Werkzeug==3.0.3
