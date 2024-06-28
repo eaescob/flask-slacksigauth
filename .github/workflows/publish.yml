@@ -39,7 +39,10 @@ jobs:
       - name: Generate hashes
         id: hash
         run: |
-          cd dist && echo "::set-output name=hashes::$(sha256sum * | base64 -w0)" >> "$GITHUB_OUTPUT"
+          #cd dist && echo "::set-output name=hashes::$(sha256sum * | base64 -w0)" >> "$GITHUB_OUTPUT"
+          cd dist
+          HASHES=$(sha256sum * | base64 -w0)
+          echo "hashes=$HASHES" >> "$GITHUB_OUTPUT"
       - name: Upload dist
         uses: actions/upload-artifact@v4.3.3
         with:
@@ -58,7 +61,6 @@ jobs:
     with:
       base64-subjects: "${{ needs.build.outputs.hashes }}"
       upload-assets: true
-      compile-generator: true # Workaround for https://github.com/slsa-framework/slsa-github-generator/issues/1163
 
   publish:
     needs: ["build", "provenance"]
@@ -75,10 +77,10 @@ jobs:
           path: "dist/"
 
       - name: Upload to releases
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        run: |
-          gh release upload ${{ github.ref_name }} dist/* --repo ${{ github.repository }}
+        uses: softprops/action-gh-release@v2.0.6
+        with:
+          files: |
+            dist/*
 
       - name: Publish to PyPi
         uses: pypa/gh-action-pypi-publish@release/v1.9.0
